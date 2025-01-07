@@ -1,0 +1,84 @@
+body {
+            font-family: "Arial", sans-serif;
+            background-color: #f0f0f0;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #000080;
+            color: #ffffff;
+            padding: 10px;
+            text-align: left;
+        }
+        nav {
+            background-color: #0000ff;
+            padding: 10px;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+        }
+        nav ul li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        main {
+            margin: 20px;
+            background-color: #ffffff;
+            padding: 20px;
+            height: 100%;
+            border: 2px solid #000080;
+            
+            position: relative;
+        }
+        footer {
+            
+            text-align: left;
+            padding: 2px;
+            position: absolute;
+            width: 100%;
+            
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #000080;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #0000ff;
+            color: #ffffff;
+        }
+
+        /* Estilos para menú responsivo */
+        @media screen and (max-width: 768px) {
+            nav ul {
+                display: block;
+                text-align: left;
+            }
+            nav ul li {
+                display: block;
+                margin: 5px 0;
+            }
+
+            footer {
+                background-color: #000080;
+                color: #ffffff;
+                text-align: left;
+                padding: 4px;
+                position: relative;
+                width: 100%;
+                bottom: 0;
+            }
+        }
