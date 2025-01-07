@@ -71,14 +71,4 @@ body {
                 display: block;
                 margin: 5px 0;
             }
-
-            footer {
-                background-color: #000080;
-                color: #ffffff;
-                text-align: left;
-                padding: 4px;
-                position: relative;
-                width: 100%;
-                bottom: 0;
-            }
         }
