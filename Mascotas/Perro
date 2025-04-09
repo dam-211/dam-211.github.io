@@ -1,0 +1,22 @@
+package ar.edu.ifts18.comoperrosgatos
+
+class Perro(nombre: String, edad: Int, ) : Mascotas (nombre, edad){
+
+    override fun hacerSonido(): String {
+        return "$nombre hace Guauuu!!! y tiene $edad de edad"
+    }
+
+    override fun comer(): String {
+        return "No estoy comiendoo!"
+    }
+
+    override fun estaDurmiendo(): Boolean {
+        return true
+    }
+
+    override fun estaJugando(): Boolean {
+        return false
+    }
+
+
+}
