@@ -1,0 +1,89 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#E2E0E0"
+    android:padding="18dp">
+
+    <!-- Son una forma de distribuir el espacio disponible en pantalla en LL, especialmente cuando querés que sean 
+    proporcionales. En otras palabras, cuano quiero que sea proporciona 
+    Entonces, el peso, es la proporcion de espacio que le corresponde a cada linear.-->
+
+    <!-- uTIL CUANDO QUIERO QUE LOS COPONENTES TE ADAPTEN AL TAMÑO DE LA PANTALLA EVITANDO MEDIAS FIJAS Y HACIENDO LAS INTERFACES MAS RESPONSIVAS-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="Elemento 1 peso 1"
+        android:layout_marginBottom="8dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ingresa un texto"
+        android:background="@android:drawable/edit_text"
+        android:textColorHint="#F00404"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:textColor="#000000"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:background="#C0BCC8"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" >
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="Elemento 2 Con peso 2"
+            android:layout_marginBottom="8dp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:background="#C0BCC8"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="Elemento 3 Con peso 3"
+            android:layout_marginBottom="8dp"
+            />
+
+    </LinearLayout>
+    
+    <!-- Peso total 6. El espacio total disponible es 6: 1/6, 2/6 y el tercero 3/6-->
+</LinearLayout>
