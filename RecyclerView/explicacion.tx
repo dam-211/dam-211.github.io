@@ -1,0 +1,21 @@
+RecyclerView es un componente de Android diseñado para mostrar listas o conjuntos de elementos de forma eficiente. A diferencia de ListView, recicla las vistas al desplazarse, lo cual mejora el rendimiento.
+
+Componentes clave:
+RecyclerView.Adapter: Es el puente entre los datos y las vistas. Crea nuevos ítems solo cuando se necesitan y les asigna los datos correspondientes.
+
+ViewHolder: Guarda referencias a los elementos visuales de cada ítem para evitar llamadas repetidas a findViewById.
+
+LayoutManager: Define cómo se organizan los elementos visualmente. Algunos tipos comunes:
+
+LinearLayoutManager: Disposición vertical u horizontal.
+
+GridLayoutManager: Estilo de grilla (rejilla).
+
+StaggeredGridLayoutManager: Grilla desalineada, útil para tarjetas de diferentes tamaños.
+
+Esquema de uso:
+Diseñar el layout de los ítems (por ejemplo: item_vengador.xml).
+
+Crear un ViewHolder que represente ese layout.
+
+Crear un Adapter que use ese ViewHolder para poblar los datos en el RecyclerView.
