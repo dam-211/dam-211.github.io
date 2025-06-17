@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DrawerLayout: Contenedor raíz que permite tener un panel deslizable (menú) desde un costado-->
+<!-- android:fitsSystemWindows="true": evita que el contenido se superponga con la barra de estado -->
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    >
+
+    <!-- Contenido principal -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Toolbar: appbar, la barra superior ?attr/actionBarSize: es un alto estandarizado de las appbar. ndroid:theme: Asegura que el texto sea siempre visible blanco sobre negro-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:title="Menú Hamburguesa"/>
+
+         <!-- Contenido de la pagina. Debería ser remplazado por un fragment. -->
+        <TextView
+            android:id="@+id/content_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contenido principal aquí"
+            android:padding="16dp"/>
+    </LinearLayout>
+
+    <!-- Navigation Drawer  Menú lateral. android:layout_gravity="start": ubica el menu a la izquierda.  app:menu="@menu/drawer_menu": referencia al XML con los ítem del menú-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/drawer_menu"
+        app:headerLayout="@layout/nav_header"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>
