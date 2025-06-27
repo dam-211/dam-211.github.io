@@ -17,11 +17,11 @@ public class HolaMundoSwing extends JFrame {
         setLayout(null); //Layout absoluto
 
         JLabel etiqueta = new JLabel("Cargando...");
-        etiqueta.setBounds(10, 10, 300, 30);
+        etiqueta.setBounds(100, 20, 100, 25);
         add(etiqueta);
 
         JButton boton = new JButton("Boton");
-        boton.setBounds(10, 100, 300, 30);
+        boton.setBounds(90, 60, 120, 30);
         add(boton);
 
         boton.addActionListener(
@@ -33,3 +33,4 @@ public class HolaMundoSwing extends JFrame {
     }
 
 }
+
