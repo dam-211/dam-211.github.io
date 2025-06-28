@@ -1,0 +1,113 @@
+@startuml
+title Sistema de Crédito Hipotecario - Con dato de solicitante
+
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+
+
+'MODELO
+
+package "ar.edu.x.reactor.model" {
+
+    class SolicitudCalculoTemperatura {
+        
+        -potenciaMw: double
+        -tiempoHoras: double
+        -eficiencia: double
+        
+        --
+        
+        +getPotencia(): double
+        +getTiempo(): double
+        +getEficiencia(): double
+        
+    }
+
+    note right of SolicitudCalculoTemperatura
+        SRP: contiene los datos del calculo
+    end note
+}
+
+'servicio
+
+package "ar.edu.x.reactor.service" {
+
+    interface CalculadoraTemperatura {
+        
+        
+        +calcularTemperaturaMaxima(solicitud: SolicitudCalculoTemperatura) : double
+    }
+    
+    class CalculadoraSimpleTemperatura {
+        
+        - R : double = 2.5
+        
+        +calcularTemperaturaMaxima(solicitud : SolicitudCalculoTemperatura) : double
+    }
+    
+    
+}
+
+CalculadoraTemperatura <|.. CalculadoraSimpleTemperatura : implementa
+
+    note right of CalculadoraSimpleTemperatura
+        OCP: podés agregar otros calculos de interés sin modfificar el controlador
+    end note
+    
+    
+package "ar.edu.x.reactor.controller" {
+
+    class ControladorTemperatura {
+        
+        -calculadora : CalculadoraTemperatura
+        +procesarCalculo(p, t, eficiencia) : double
+    }
+    
+    
+
+    note right of ControladorTemperatura
+        SRP: coordina entre vista y servicio
+        DIP: depende de la interfaz
+    end note
+    
+    
+package "ar.edu.x.reactor.view" {
+
+    class VistaTemperatura {
+    
+        -campoPotencia : JTextFiel
+    
+        +VistaTemperatura(controlador: ControladorTemperatura)
+    }
+    
+       note right of ControladorTemperatura
+        SRP: maneja solo la UI
+        no accede a logica
+    end note
+    
+
+package "ar.edu.x.reactor.app" { 
+
+    class AplicacionPrincipal {
+        
+        +main(args : String[]) :void
+        }
+        
+        note right of AplicacionPrincipal
+        DIP: instancia dependencias y las conecta
+    end note
+    
+}    
+
+
+'Relaciones
+
+
+ControladorTemperatura --> CalculadoraTemperatura : usa
+ControladorTemperatura --> SolicitudCalculoTemperatura : crea
+CalculadoraSimpleTemperatura --> SolicitudCalculoTemperatura : accede
+VistaTemperatura --> ControladorTemperatura : invoca
+AplicacionPrincipal --> VistaTemperatura : instancia
+AplicacionPrincipal --> ControladorTemperatura: construye
+
+@enduml
