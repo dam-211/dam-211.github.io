@@ -1,0 +1,152 @@
+@startuml
+title Sistema de Crédito Hipotecario - Con dato de solicitante
+
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam classFontSize 12
+skinparam classAttributeFontSize 11
+skinparam classMethodFontSize 11
+
+package "ar.edu.x.model" {
+
+    class SolicitudCredito {
+        
+        -nombre: Stirng
+        -apellido: String
+        -dni: String
+        -monto: double
+        -tasaAnual: double
+        -cantidadMeses: int
+        
+        --
+        +getNombre(): String
+        +getApellido(): String
+        +getDNI(): String
+        +getMonto(): double
+        +getTasaAnual(): double
+        +getCantidadMeses(): int
+        
+        }
+
+}
+
+
+note right of SolicitudCredito
+    SRP (S): representa los datos del prestamo
+    No tiene logica de cálculo ni de UI.
+end note
+
+
+package "ar.edu.x.service" {
+
+    interface CalculadoraCredito {
+        +calcularCuotaMensual(solicitud : SolicitudCredito) : double
+    }
+    
+    class CalculadoraSistemaFrances {
+    
+        +calculadoraCuotaMensual(solicitud: SolicitudCredito): double
+    }
+    
+    
+    CalculadoraCredito <|.. CalculadoraSistemaFrances
+
+}
+
+
+note right of CalculadoraSistemaFrances
+    OCP (O): se pueden agregag nuevos sistemas
+    sin modificar el controlador
+end note
+
+package "ar.edu.x.controller" {
+
+    class ControladorCredito {
+    
+        -calculadoraCredito : CalculadoraCredito
+        
+        --
+        
+        + procesarSolicitud(nombre, apellido, dni, monto, tasa, meses) : String
+        
+    }
+
+}
+
+note right of ControladorCredito
+    SRP (S):coordina vista y servicio
+    No calcula ni muestra
+    DIP (D): depende de interfaz, no de una clase concreta.
+end note
+
+
+package "ar.edu.x.view" {
+
+    class VistaCredito {
+        
+        -campoNombre : JTextField
+        -campoDNI: JTextField
+        -campoTasa: JTextField
+        -campoMeses: JTextField
+        -campoMonto: JTextField
+        -campoResultado: JTextArea
+        
+        --
+        
+        +VistaCredito(controlador : ControladorCredito)
+    }
+}
+
+note right of VistaCredito
+    SRP (S): Se encarga solo de la UI
+    Invoca al controlador y no calcula
+end note
+
+
+package "ar.edu.x.app" {
+
+    class MainApp {
+    
+        +main(args : String[]) : void
+    }
+}
+
+note right of MainApp
+    DIP: instancia dependencias y las conecta
+    las clases no se instancian entre si directamente!!
+end note
+
+
+'Relaciones entre clases
+
+'El controlador necesita una calculadora para hacer el calculo de la cuota
+'No hace el cálculo el mismo, si no que delega la responsabilidad a quine sepa hacerlo
+
+'O: puedo agregar nuevos sistemas sin modificar al controlador
+'D: el cotrolador depende de la interface y no de una clase concreta
+
+ControladorCredito --> CalculadoraCredito : usa 
+
+'El controlador arma una solicitud con los datos que recibe (nombre, monto, ect)
+'Con esta información del usuario,creo una solicitud de credito
+'S: la solicitud solo guarda los datos, controlador solo organiza y procesa
+
+ControladorCredito --> SolicitudCredito : crea
+
+'La calculadora lee los datos de la solicitud(monto, tasa, meses) para hacer el cálculo
+'Solo consulta la solicitud
+CalculadoraSistemaFrances --> SolicitudCredito : accede
+
+'VistaCredito le pide al controlador que procese los datos
+'cuando el usuario hace click en calcular
+VistaCredito --> ControladorCredito : invoca
+
+'La clase principal crea la vista cuando arranca el programa en el main
+MainApp --> VistaCredito : instancia
+
+'Antes de crear la vista, la app crea el controlador y se lo pasa a la vista
+'ESTO ES INYECCION DE DEPENDENCIAS, LA VISTA NO CREA EL CONTROLADOR, SOLO LO RECIBE
+MainApp --> ControladorCredito : construye
+
+'El usuario llena el form --> el controlador arma la solicitud con los datos que le dio la vista --> la calculadora saca el resultado
+'Todo es coordinano por MainApp
